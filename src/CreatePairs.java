@@ -2,30 +2,127 @@ import java.util.ArrayList;
 
 public class CreatePairs {
 
-    static boolean addition = true; //0
-    static boolean subtraction = true; //1
-    static boolean multiplication = true; //2
-    static boolean division = true; //3
+   private static boolean addition; //0
+   private static boolean subtraction; //1
+   private static boolean multiplication; //2
+   private static boolean division; //3
 
-    static int maxNum=30;
-    static int minNum=-30;
 
-    static int numPairs=30;
+    private static int maxNum;
+   private static int minNum;
 
-    static int maxNumDoing=1;
-    static int minNumDoing=1;
+   private static int numPairs;
 
-    static ArrayList<Pair> arrayListWithPair = new ArrayList<>();
+   private static int maxNumDoing;
+   private static int minNumDoing;
 
-    //private ArrayList<Pair> createArrayListWithPairs()
+   private static ArrayList<Pair> arrayListWithPair ;
+
 
     public static void main(String[] args) {
 
+CreatePairs a = new CreatePairs(true, true, true, true, 50, -50, 5, 1, 30);
+        a.fillArrayList();
+        for(int i=0; i<a.getArrayListWithPair().size(); i++)
+            System.out.println(a.getArrayListWithPair().get(i));
 
-        fillArrayList();
-        for(int i=0; i<arrayListWithPair.size(); i++)
-            System.out.println(arrayListWithPair.get(i));
+    }
 
+    public CreatePairs(boolean addition, boolean subtraction, boolean multiplication, boolean division, int maxNum, int minNum, int maxNumDoing, int minNumDoing, int numPairs ) {
+        this.addition = addition;
+        this.subtraction = subtraction;
+        this.multiplication = multiplication;
+        this.division = division;
+
+        this.maxNum = maxNum;
+        this.minNum = minNum;
+
+        this.maxNumDoing = maxNumDoing;
+        this.minNumDoing = minNumDoing;
+
+        this.numPairs = numPairs;
+
+        this.arrayListWithPair =new ArrayList<>();
+    }
+
+    public static boolean isAddition() {
+        return addition;
+    }
+
+    public static void setAddition(boolean addition) {
+        CreatePairs.addition = addition;
+    }
+
+    public static boolean isSubtraction() {
+        return subtraction;
+    }
+
+    public static void setSubtraction(boolean subtraction) {
+        CreatePairs.subtraction = subtraction;
+    }
+
+    public static boolean isMultiplication() {
+        return multiplication;
+    }
+
+    public static void setMultiplication(boolean multiplication) {
+        CreatePairs.multiplication = multiplication;
+    }
+
+    public static boolean isDivision() {
+        return division;
+    }
+
+    public static void setDivision(boolean division) {
+        CreatePairs.division = division;
+    }
+
+    public static int getMaxNum() {
+        return maxNum;
+    }
+
+    public static void setMaxNum(int maxNum) {
+        CreatePairs.maxNum = maxNum;
+    }
+
+    public static int getMinNum() {
+        return minNum;
+    }
+
+    public static void setMinNum(int minNum) {
+        CreatePairs.minNum = minNum;
+    }
+
+    public static int getNumPairs() {
+        return numPairs;
+    }
+
+    public static void setNumPairs(int numPairs) {
+        CreatePairs.numPairs = numPairs;
+    }
+
+    public static int getMaxNumDoing() {
+        return maxNumDoing;
+    }
+
+    public static void setMaxNumDoing(int maxNumDoing) {
+        CreatePairs.maxNumDoing = maxNumDoing;
+    }
+
+    public static int getMinNumDoing() {
+        return minNumDoing;
+    }
+
+    public static void setMinNumDoing(int minNumDoing) {
+        CreatePairs.minNumDoing = minNumDoing;
+    }
+
+    public static ArrayList<Pair> getArrayListWithPair() {
+        return arrayListWithPair;
+    }
+
+    public static void setArrayListWithPair(ArrayList<Pair> arrayListWithPair) {
+        CreatePairs.arrayListWithPair = arrayListWithPair;
     }
 
     private static String replaceFirstStr(String string, String target, String replacment){
