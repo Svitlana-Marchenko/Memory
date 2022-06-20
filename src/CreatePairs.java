@@ -21,7 +21,7 @@ public class CreatePairs {
 
     public static void main(String[] args) {
 
-CreatePairs a = new CreatePairs(true, true, true, true, 50, -50, 5, 1, 30);
+CreatePairs a = new CreatePairs(true, true, true, true, 50, -50, 5, 1, 2);
         a.fillArrayList();
         for(int i=0; i<a.getArrayListWithPair().size(); i++)
             System.out.println(a.getArrayListWithPair().get(i));
