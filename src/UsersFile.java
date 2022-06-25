@@ -4,9 +4,26 @@ import java.util.ArrayList;
 public class UsersFile {
 //ФАЙЛ
     static File file = new File("C:\\ab1\\game.txt");
+    ArrayList<User> userArrayList;
 
-    public static void main(String[] args) throws IOException {
+    public static File getFile() {
+        return file;
+    }
 
+    public static void setFile(File file) {
+        UsersFile.file = file;
+    }
+
+    public ArrayList<User> getUserArrayList() {
+        return userArrayList;
+    }
+
+    public void setUserArrayList(ArrayList<User> userArrayList) {
+        this.userArrayList = userArrayList;
+    }
+
+    public UsersFile() throws FileNotFoundException {
+        this.userArrayList = createArrayListFromFile();
 
     }
 
