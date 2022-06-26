@@ -68,7 +68,7 @@ for(int i=0; i<userFile.getUserArrayList().size(); i++){
 
 textArea.setBackground(Color.decode("#F7FAA5"));
 
-        ImageIcon iconPlay = new ImageIcon("C:\\Lab3\\Play.png");
+        ImageIcon iconPlay = new ImageIcon("buttons\\Play.png");
         JLabel play = new JLabel(iconPlay);
         play.addMouseListener(new MouseListener() {
             @Override
@@ -98,7 +98,7 @@ textArea.setBackground(Color.decode("#F7FAA5"));
         });
         mainPanel.add(play);
 
-        ImageIcon iconAwards = new ImageIcon("C:\\Lab3\\Awards.png");
+        ImageIcon iconAwards = new ImageIcon("buttons\\Awards.png");
         JLabel awards = new JLabel(iconAwards);
         awards.addMouseListener(new MouseListener() {
             @Override
@@ -128,7 +128,7 @@ textArea.setBackground(Color.decode("#F7FAA5"));
         });
         mainPanel.add(awards);
 
-        ImageIcon iconExit = new ImageIcon("C:\\Lab3\\Exit.png");
+        ImageIcon iconExit = new ImageIcon("buttons\\Exit.png");
         JLabel exit = new JLabel(iconExit);
        exit.addMouseListener(new MouseListener() {
             @Override
@@ -169,7 +169,7 @@ textArea.setBackground(Color.decode("#F7FAA5"));
         welcome.setForeground(Color.decode("#970EAB"));
         welcomePanel.add(welcome);
 
-        ImageIcon iconLogin = new ImageIcon("C:\\Lab3\\login.png");
+        ImageIcon iconLogin = new ImageIcon("buttons\\login.png");
         JLabel login = new JLabel(iconLogin);
         login.addMouseListener(new MouseListener() {
             @Override
@@ -215,7 +215,7 @@ user = findUserUsingName(username);
         or.setForeground(Color.decode("#970EAB"));
         welcomePanel.add(or);
 
-        ImageIcon iconSignup = new ImageIcon("C:\\Lab3\\signup.png");
+        ImageIcon iconSignup = new ImageIcon("buttons\\signup.png");
         JLabel signup = new JLabel(iconSignup);
         signup.addMouseListener(new MouseListener() {
             @Override
