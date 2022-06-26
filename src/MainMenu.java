@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
@@ -70,94 +71,34 @@ textArea.setBackground(Color.decode("#F7FAA5"));
 
         ImageIcon iconPlay = new ImageIcon("buttons\\Play.png");
         JLabel play = new JLabel(iconPlay);
-        play.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
+        play.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
+                super.mousePressed(e);
             }
         });
         mainPanel.add(play);
 
         ImageIcon iconAwards = new ImageIcon("buttons\\Awards.png");
         JLabel awards = new JLabel(iconAwards);
-        awards.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-        mainPanel.add(awards);
+        awards.addMouseListener(new MouseAdapter() {
+                                    @Override
+                                    public void mousePressed(MouseEvent e) {
+                                        super.mousePressed(e);
+                                    }
+                                });
+                mainPanel.add(awards);
 
         ImageIcon iconExit = new ImageIcon("buttons\\Exit.png");
         JLabel exit = new JLabel(iconExit);
-       exit.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-            System.exit(0);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-                System.exit(0);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-        mainPanel.add(exit);
+       exit.addMouseListener(new MouseAdapter() {
+                                 @Override
+                                 public void mousePressed(MouseEvent e) {
+                                     super.mousePressed(e);
+                                     System.exit(0);
+                                 }
+                             });
+               mainPanel.add(exit);
     }
 
     private void initWelcomePage(JFrame frame){
@@ -171,44 +112,24 @@ textArea.setBackground(Color.decode("#F7FAA5"));
 
         ImageIcon iconLogin = new ImageIcon("buttons\\login.png");
         JLabel login = new JLabel(iconLogin);
-        login.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-if(userFile.getUserArrayList().size()==0){
-    new Message("Please, sign up before logining");
-}
-else{
-chooseUser choose = new chooseUser(createArrayFromArrayList());
-String username= choose.getInfo();
-user = findUserUsingName(username);
-    welcomePanel.setVisible(false);
-    remove(welcomePanel);
-    init(frame);
-}
-            }
+        login.addMouseListener(new MouseAdapter() {
+                                   @Override
+                                   public void mousePressed(MouseEvent e) {
+                                       super.mousePressed(e);
+                                       if (userFile.getUserArrayList().size() == 0) {
+                                           new Message("Please, sign up before logining");
+                                       } else {
+                                           chooseUser choose = new chooseUser(createArrayFromArrayList());
+                                           String username = choose.getInfo();
+                                           user = findUserUsingName(username);
+                                           welcomePanel.setVisible(false);
+                                           remove(welcomePanel);
+                                           init(frame);
+                                       }
+                                   }
+                               });
+                welcomePanel.add(login);
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-        welcomePanel.add(login);
 
         JLabel or = new JLabel("or", SwingConstants.CENTER);
         or.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 70));
@@ -217,52 +138,32 @@ user = findUserUsingName(username);
 
         ImageIcon iconSignup = new ImageIcon("buttons\\signup.png");
         JLabel signup = new JLabel(iconSignup);
-        signup.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-signUp typingName = new signUp();
-String name = typingName.getInfo();
-if(name!=null&&!checkTheNameOnExsiting(name)){
-    userFile.getUserArrayList().add(new User(name));
-    try {
-        userFile.writeArrayListToTheFile(userFile.getUserArrayList());
-    } catch (FileNotFoundException ex) {
-        ex.printStackTrace();
-    } catch (UnsupportedEncodingException ex) {
-        ex.printStackTrace();
-    }
-user = findUserUsingName(name);
-    welcomePanel.setVisible(false);
-    remove(welcomePanel);
-    init(frame);
-}
-else if(name!=null&&checkTheNameOnExsiting(name)){
-    new Message("This user has already been created");
-}
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-        welcomePanel.add(signup);
+        signup.addMouseListener(new MouseAdapter() {
+                                    @Override
+                                    public void mousePressed(MouseEvent e) {
+                                        super.mousePressed(e);
+                                        signUp typingName = new signUp();
+                                        String name = typingName.getInfo();
+                                        if(name!=null&&!checkTheNameOnExsiting(name)){
+                                            userFile.getUserArrayList().add(new User(name));
+                                            try {
+                                                userFile.writeArrayListToTheFile(userFile.getUserArrayList());
+                                            } catch (FileNotFoundException ex) {
+                                                ex.printStackTrace();
+                                            } catch (UnsupportedEncodingException ex) {
+                                                ex.printStackTrace();
+                                            }
+                                            user = findUserUsingName(name);
+                                            welcomePanel.setVisible(false);
+                                            remove(welcomePanel);
+                                            init(frame);
+                                        }
+                                        else if(name!=null&&checkTheNameOnExsiting(name)){
+                                            new Message("This user has already been created");
+                                        }
+                                    }
+                                });
+                welcomePanel.add(signup);
     }
 
 
