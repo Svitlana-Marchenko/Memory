@@ -5,7 +5,9 @@ public class UsersFile {
 //ФАЙЛ
     static File file = new File("C:\\ab1\\game.txt");
     ArrayList<User> userArrayList;
-
+    public static void main(String[] args) throws FileNotFoundException {
+        System.out.println(createArrayListFromFile());
+    }
     public static File getFile() {
         return file;
     }
@@ -117,7 +119,7 @@ ArrayList<User> answ = new ArrayList<>();
         return answ;
     }
 
-    private static void writeArrayListToTheFile(ArrayList<User> user) throws FileNotFoundException, UnsupportedEncodingException {
+    static void writeArrayListToTheFile(ArrayList<User> user) throws FileNotFoundException, UnsupportedEncodingException {
         PrintWriter writer = new PrintWriter(file.getAbsolutePath(), "UTF-8");
         writer.println("The higest score: "+findThehighestScore(user));
         writer.println(" ");
