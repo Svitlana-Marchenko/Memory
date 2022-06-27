@@ -1,9 +1,12 @@
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,7 +18,10 @@ public class MainMenu extends JFrame {
     User user;
     static UsersFile userFile;
 
-    public MainMenu() throws FileNotFoundException {
+    String click = "Sounds\\click.wav";
+    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(click).getAbsoluteFile());
+
+    public MainMenu() throws IOException, UnsupportedAudioFileException {
         super("Mathmory");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500, 900);
@@ -75,6 +81,9 @@ textArea.setBackground(Color.decode("#F7FAA5"));
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
+                mainPanel.setVisible(false);
+                remove(mainPanel);
+                initGameSettings(frame);
             }
         });
         mainPanel.add(play);
@@ -95,6 +104,16 @@ textArea.setBackground(Color.decode("#F7FAA5"));
                                  @Override
                                  public void mousePressed(MouseEvent e) {
                                      super.mousePressed(e);
+                                     try {
+                                         Clip clip = AudioSystem.getClip();
+                                         clip.open(audioInputStream);
+                                         clip.start();
+                                     }catch(LineUnavailableException ex){
+                                         System.err.println(ex.getMessage());
+                                     }
+                                     catch(IOException ex){
+                                         System.err.println(ex.getMessage());
+                                     }
                                      System.exit(0);
                                  }
                              });
@@ -193,4 +212,190 @@ public boolean checkTheNameOnExsiting(String name){
         }
         return false;
 }
+
+    private void initGameSettings(JFrame frame){
+        ButtonGroup operation = new ButtonGroup();
+        JPanel settingsPanel = new JPanel(new GridLayout(9, 2));
+        settingsPanel.setBackground(Color.decode("#F7FAA5"));
+        add(settingsPanel);
+
+        JLabel operations = new JLabel("1) Operations:");
+        operations.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
+        operations.setForeground(Color.decode("#970EAB"));
+        settingsPanel.add(operations);
+
+        JLabel label = new JLabel("      ");
+        label.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
+        label.setForeground(Color.decode("#970EAB"));
+        settingsPanel.add(label);
+
+        ImageIcon iconAdd = new ImageIcon("MathOperations\\addition.png");
+        JLabel add = new JLabel(iconAdd);
+
+        ImageIcon iconDiv = new ImageIcon("MathOperations\\division.png");
+        JLabel div = new JLabel(iconDiv);
+
+        ImageIcon iconMult = new ImageIcon("MathOperations\\multiplication.png");
+        JLabel mult = new JLabel(iconMult);
+
+        ImageIcon iconSub = new ImageIcon("MathOperations\\subtraction.png");
+        JLabel sub= new JLabel(iconSub);
+
+        JCheckBoxMenuItem addition = new JCheckBoxMenuItem("", iconAdd);
+        addition.setBackground(Color.decode("#F7FAA5"));
+        operations.add(addition);
+        settingsPanel.add(addition);
+
+        JCheckBoxMenuItem subtraction = new JCheckBoxMenuItem("", iconSub);
+        subtraction.setBackground(Color.decode("#F7FAA5"));
+        operations.add(subtraction);
+        settingsPanel.add(subtraction);
+
+        JCheckBoxMenuItem multiplication = new JCheckBoxMenuItem("", iconAdd);
+        multiplication.setBackground(Color.decode("#F7FAA5"));
+        operations.add(multiplication);
+        settingsPanel.add(multiplication);
+
+        JCheckBoxMenuItem division = new JCheckBoxMenuItem("", iconDiv);
+        division.setBackground(Color.decode("#F7FAA5"));
+        operations.add(division);
+        settingsPanel.add(division);
+
+        JLabel quantity = new JLabel("2) Quantity of cards:");
+        quantity.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
+        quantity.setForeground(Color.decode("#970EAB"));
+        settingsPanel.add(quantity);
+
+        JSlider numTask = new JSlider(4, 16, 6);
+        numTask.setBackground(Color.decode("#F7FAA5"));
+
+        numTask.setFont(new Font("Arial", Font.PLAIN, 25));
+
+        numTask.setPaintLabels(true);
+        numTask.setPaintTicks(true);
+
+        numTask.setPaintLabels(true);
+        numTask.setMajorTickSpacing(2);
+
+        numTask.setValueIsAdjusting(true);
+        settingsPanel.add(numTask);
+
+        JLabel max = new JLabel("3) Max number:");
+        max.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
+        max.setForeground(Color.decode("#970EAB"));
+        settingsPanel.add(max);
+
+        JSpinner maxNum = new JSpinner(new SpinnerNumberModel(10, -1000, 1000, 1));
+        maxNum.getEditor().getComponent(0).setBackground(Color.decode("#F7FAA5"));
+        maxNum.setSize(700, 300);
+        maxNum.setFont(new Font("Arial", Font.PLAIN, 25));
+        settingsPanel.add(maxNum);
+
+        JLabel min = new JLabel("4) Min number:");
+        min.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
+        min.setForeground(Color.decode("#970EAB"));
+        settingsPanel.add(min);
+
+        JSpinner minNum = new JSpinner(new SpinnerNumberModel(-10, -1000, 1000, 1));
+        minNum.getEditor().getComponent(0).setBackground(Color.decode("#F7FAA5"));
+        minNum.setSize(700, 300);
+        minNum.setFont(new Font("Arial", Font.PLAIN, 25));
+        settingsPanel.add(minNum);
+
+        JLabel maxQO = new JLabel("5) Max quantity of operations:");
+        maxQO.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
+        maxQO.setForeground(Color.decode("#970EAB"));
+        settingsPanel.add(maxQO);
+
+        JSlider maxNumO = new JSlider(1, 5, 3);
+        maxNumO.setBackground(Color.decode("#F7FAA5"));
+
+        maxNumO.setFont(new Font("Arial", Font.PLAIN, 25));
+
+        maxNumO.setPaintLabels(true);
+        maxNumO.setPaintTicks(true);
+
+        maxNumO.setPaintLabels(true);
+        maxNumO.setMajorTickSpacing(1);
+
+        maxNumO.setValueIsAdjusting(true);
+        settingsPanel.add(maxNumO);
+
+        JLabel minQO = new JLabel("6) Min quantity of operations:");
+        minQO.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
+        minQO.setForeground(Color.decode("#970EAB"));
+        settingsPanel.add(minQO);
+
+        JSlider minNumO = new JSlider(1, 5, 1);
+        minNumO.setBackground(Color.decode("#F7FAA5"));
+
+        minNumO.setFont(new Font("Arial", Font.PLAIN, 25));
+
+        minNumO.setPaintLabels(true);
+        minNumO.setPaintTicks(true);
+
+        minNumO.setPaintLabels(true);
+        minNumO.setMajorTickSpacing(1);
+
+        minNumO.setValueIsAdjusting(true);
+        settingsPanel.add(minNumO);
+
+        ImageIcon iconBack = new ImageIcon("buttons\\back.png");
+        JLabel back = new JLabel(iconBack);
+        back.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                settingsPanel.setVisible(false);
+                remove(settingsPanel);
+                init(frame);
+            }
+        });
+        settingsPanel.add(back);
+
+        ImageIcon iconStart = new ImageIcon("buttons\\start.png");
+        JLabel start = new JLabel(iconStart);
+        start.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                boolean add = addition.getState();
+                boolean subtr = subtraction.getState();
+                boolean mult = multiplication.getState();
+                boolean div = division.getState();
+                int numD = numTask.getValue();
+                int min = (int) minNum.getValue();
+                int max = (int) maxNum.getValue();
+                int minD = (int) minNumO.getValue();
+                int maxD = (int) maxNumO.getValue();
+
+                if(minD>maxD){
+                    new Message("Oh, the min number of operations is bigger than the max number.\n Please change it.");
+                }
+
+                else if(max<min){
+                    new Message("Oh, the min number is bigger than the max number.\n Please change it.");
+                }
+
+               else if((max>0 && min>0 && (1+max-min)<numD) || (max<0 && min<0 && (1+max-min)<numD) || (max>=0 && min<=0 && (max-min)<numD)){
+                    new Message("You`ve chosen too small number interval or too many cards.\nPlease, change interval or quantity of cards");
+                }
+else if((add==false && subtr==false && mult==false && div==false)){
+                    new Message("You have not selected any operations. Please, select one at least.");
+                }
+else {
+CreatePairs a = new CreatePairs(add, subtr, mult, div, max, min, maxD, minD, numD);
+                    settingsPanel.setVisible(false);
+                    remove(settingsPanel);
+                }
+            }
+        });
+        settingsPanel.add(start);
+
+
+
+
+
+
+    }
 }
