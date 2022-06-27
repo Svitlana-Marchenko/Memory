@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         // write your code here
         MainMenu a = new MainMenu();
-        a.setBounds(200,100,600,900);
+        a.setBounds(200,0,600,800);
         a.setVisible(true);
     }
 }

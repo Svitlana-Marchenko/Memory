@@ -12,8 +12,8 @@ import java.util.Comparator;
 public class MainMenu extends JFrame {
 
     JPanel mainPanel;
-User user;
-static UsersFile userFile;
+    User user;
+    static UsersFile userFile;
 
     public MainMenu() throws FileNotFoundException {
         super("Mathmory");
@@ -48,23 +48,23 @@ static UsersFile userFile;
         mainPanel = new JPanel(new GridLayout(5, 1));
         mainPanel.setBackground(Color.decode("#F7FAA5"));
         add(mainPanel);
-JLabel gameName = new JLabel("MathMory", SwingConstants.CENTER);
-gameName.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 70));
-gameName.setForeground(Color.decode("#970EAB"));
-mainPanel.add(gameName);
+        JLabel gameName = new JLabel("MathMory", SwingConstants.CENTER);
+        gameName.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 70));
+        gameName.setForeground(Color.decode("#970EAB"));
+        mainPanel.add(gameName);
 
 
- JTextArea  textArea = new JTextArea(userFile.getUserArrayList().size(), 2);
+        JTextArea  textArea = new JTextArea(userFile.getUserArrayList().size(), 2);
         JScrollPane scrollPane = new JScrollPane(textArea);
-       textArea.setEditable(false);
+        textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setFont(new Font("Arial", Font.PLAIN, 25));
 
-mainPanel.add(scrollPane);
-sortUserFile();
-textArea.append("Top players:\n");
-for(int i=0; i<userFile.getUserArrayList().size(); i++){
-        textArea.append((i+1)+") "+userFile.getUserArrayList().get(i).getName()+" - "+userFile.getUserArrayList().get(i).getScore()+"\n");
+        mainPanel.add(scrollPane);
+        sortUserFile();
+        textArea.append("Top players:\n");
+        for(int i=0; i<userFile.getUserArrayList().size(); i++){
+                textArea.append((i+1)+") "+userFile.getUserArrayList().get(i).getName()+" - "+userFile.getUserArrayList().get(i).getScore()+"\n");
 }
 
 textArea.setBackground(Color.decode("#F7FAA5"));
