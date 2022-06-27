@@ -4,10 +4,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -18,10 +15,6 @@ public class MainMenu extends JFrame {
     User user;
     static UsersFile userFile;
 
-
-    String click = "Sounds\\click.wav";
-    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(click).getAbsoluteFile());
-    AudioInputStream audioInputStream1 = AudioSystem.getAudioInputStream(new File(click).getAbsoluteFile());
 
     public MainMenu() throws IOException, UnsupportedAudioFileException {
         super("Mathmory");
@@ -391,11 +384,6 @@ CreatePairs a = new CreatePairs(add, subtr, mult, div, max, min, maxD, minD, num
         });
         settingsPanel.add(start);
 
-
-
-
-
-
     }
 
     private void addSoundButtonEffect(){
@@ -425,4 +413,6 @@ CreatePairs a = new CreatePairs(add, subtr, mult, div, max, min, maxD, minD, num
             ex.printStackTrace();
         }
     }
+
+
 }
