@@ -161,12 +161,13 @@ textArea.setBackground(Color.decode("#F7FAA5"));
                                         addSoundButtonEffect();
                                         signUp typingName = new signUp();
                                         String name = typingName.getInfo();
-                                        if(name.equals("")){
+                                        if(name!=null && name.equals("")){
                                             addSoundProblemsEffect();
                                             new Message("This name is empty");
                                         }
                                         else if(name!=null&&!checkTheNameOnExsiting(name)){
                                             userFile.getUserArrayList().add(new User(name));
+                                            userFile.writeArrayListToTheFile(userFile.getUserArrayList());
                                             user = findUserUsingName(name);
                                             welcomePanel.setVisible(false);
                                             remove(welcomePanel);
