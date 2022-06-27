@@ -11,10 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
@@ -42,6 +39,7 @@ public class Game extends JFrame {
     public static void main(String[] args) {
         openedCards=new ArrayList<>();
         cards=CreatePairs.temp();
+        cards = sortRandomly(cards);
         countRowsAndCols();
         Game a = new Game();
         a.setBounds(200,0,cardsCols*cardSize+cardsCols*7,(cardsRows+1)*cardSize+cardsRows*20);
@@ -187,4 +185,36 @@ public class Game extends JFrame {
         }
     }
 
+    private static ArrayList<Pair> sortRandomly(ArrayList<Pair> list){
+    Pair[] pairsArray = createArrayFromArrayList(list);
+    randomSort(pairsArray);
+    return createArrayListFromArray(pairsArray);
+    }
+
+    private static ArrayList<Pair> createArrayListFromArray(Pair[] info){
+        ArrayList<Pair> answ= new ArrayList<>();
+        for(int i=0; i<info.length; i++){
+            answ.add(info[i]);
+        }
+        return answ;
+    }
+
+    private static Pair[] randomSort(Pair[] info){
+        Random rnd = new Random();
+        for(int i = 0; i < info.length; i++) {
+            int index = rnd.nextInt(i + 1);
+            Pair a = info[index];
+            info[index] = info[i];
+            info[i] = a;
+        }
+        return info;
+    }
+
+    private static Pair[] createArrayFromArrayList(ArrayList<Pair> info){
+        Pair[] answ = new Pair[info.size()];
+        for(int i=0; i<info.size(); i++){
+            answ[i] = info.get(i);
+        }
+        return answ;
+    }
 }
