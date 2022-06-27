@@ -1,7 +1,7 @@
 public class Results {
-    int mistakes;
-    int time;
-    CreatePairs gameSettings;
+    private int mistakes;
+    private int time;
+    private CreatePairs gameSettings;
 
     /**
      * class for results of the game
