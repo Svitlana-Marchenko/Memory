@@ -98,6 +98,9 @@ textArea.setBackground(Color.decode("#F7FAA5"));
                                     public void mousePressed(MouseEvent e) {
                                         super.mousePressed(e);
                                         addSoundButtonEffect();
+                                        AchievementsMenu a = new AchievementsMenu(user);
+                                        a.setBounds(200,0,640,830);
+                                        a.setVisible(true);
                                     }
                                 });
                 mainPanel.add(awards);
