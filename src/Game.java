@@ -69,26 +69,10 @@ public class Game extends JFrame {
                         public void mouseClicked(MouseEvent e) {
                             System.out.println(finalNum);
                         }
-
-                        @Override
-                        public void mousePressed(MouseEvent e) {
-
-                        }
-
-                        @Override
-                        public void mouseReleased(MouseEvent e) {
-
-                        }
-
-                        @Override
-                        public void mouseEntered(MouseEvent e) {
-
-                        }
-
-                        @Override
-                        public void mouseExited(MouseEvent e) {
-
-                        }
+                        public void mousePressed(MouseEvent e) {}
+                        public void mouseReleased(MouseEvent e) {}
+                        public void mouseEntered(MouseEvent e) {}
+                        public void mouseExited(MouseEvent e) {}
                     });
                     num++;
                 }
