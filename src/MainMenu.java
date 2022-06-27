@@ -18,8 +18,10 @@ public class MainMenu extends JFrame {
     User user;
     static UsersFile userFile;
 
+
     String click = "Sounds\\click.wav";
     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(click).getAbsoluteFile());
+    AudioInputStream audioInputStream1 = AudioSystem.getAudioInputStream(new File(click).getAbsoluteFile());
 
     public MainMenu() throws IOException, UnsupportedAudioFileException {
         super("Mathmory");
@@ -81,6 +83,7 @@ textArea.setBackground(Color.decode("#F7FAA5"));
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
+                addSoundButtonEffect();
                 mainPanel.setVisible(false);
                 remove(mainPanel);
                 initGameSettings(frame);
@@ -94,6 +97,7 @@ textArea.setBackground(Color.decode("#F7FAA5"));
                                     @Override
                                     public void mousePressed(MouseEvent e) {
                                         super.mousePressed(e);
+                                        addSoundButtonEffect();
                                     }
                                 });
                 mainPanel.add(awards);
@@ -104,16 +108,7 @@ textArea.setBackground(Color.decode("#F7FAA5"));
                                  @Override
                                  public void mousePressed(MouseEvent e) {
                                      super.mousePressed(e);
-                                     try {
-                                         Clip clip = AudioSystem.getClip();
-                                         clip.open(audioInputStream);
-                                         clip.start();
-                                     }catch(LineUnavailableException ex){
-                                         System.err.println(ex.getMessage());
-                                     }
-                                     catch(IOException ex){
-                                         System.err.println(ex.getMessage());
-                                     }
+                                     addSoundButtonEffect();
                                      System.exit(0);
                                  }
                              });
@@ -135,7 +130,9 @@ textArea.setBackground(Color.decode("#F7FAA5"));
                                    @Override
                                    public void mousePressed(MouseEvent e) {
                                        super.mousePressed(e);
+                                       addSoundButtonEffect();
                                        if (userFile.getUserArrayList().size() == 0) {
+                                           addSoundProblemsEffect();
                                            new Message("Please, sign up before logining");
                                        } else {
                                            chooseUser choose = new chooseUser(createArrayFromArrayList());
@@ -161,23 +158,23 @@ textArea.setBackground(Color.decode("#F7FAA5"));
                                     @Override
                                     public void mousePressed(MouseEvent e) {
                                         super.mousePressed(e);
+                                        addSoundButtonEffect();
                                         signUp typingName = new signUp();
                                         String name = typingName.getInfo();
-                                        if(name!=null&&!checkTheNameOnExsiting(name)){
+                                        if(name!=null && name.equals("")){
+                                            addSoundProblemsEffect();
+                                            new Message("This name is empty");
+                                        }
+                                        else if(name!=null&&!checkTheNameOnExsiting(name)){
                                             userFile.getUserArrayList().add(new User(name));
-                                            try {
-                                                userFile.writeArrayListToTheFile(userFile.getUserArrayList());
-                                            } catch (FileNotFoundException ex) {
-                                                ex.printStackTrace();
-                                            } catch (UnsupportedEncodingException ex) {
-                                                ex.printStackTrace();
-                                            }
+                                            userFile.writeArrayListToTheFile(userFile.getUserArrayList());
                                             user = findUserUsingName(name);
                                             welcomePanel.setVisible(false);
                                             remove(welcomePanel);
                                             init(frame);
                                         }
                                         else if(name!=null&&checkTheNameOnExsiting(name)){
+                                            addSoundProblemsEffect();
                                             new Message("This user has already been created");
                                         }
                                     }
@@ -230,16 +227,12 @@ public boolean checkTheNameOnExsiting(String name){
         settingsPanel.add(label);
 
         ImageIcon iconAdd = new ImageIcon("MathOperations\\addition.png");
-        JLabel add = new JLabel(iconAdd);
 
         ImageIcon iconDiv = new ImageIcon("MathOperations\\division.png");
-        JLabel div = new JLabel(iconDiv);
 
         ImageIcon iconMult = new ImageIcon("MathOperations\\multiplication.png");
-        JLabel mult = new JLabel(iconMult);
 
         ImageIcon iconSub = new ImageIcon("MathOperations\\subtraction.png");
-        JLabel sub= new JLabel(iconSub);
 
         JCheckBoxMenuItem addition = new JCheckBoxMenuItem("", iconAdd);
         addition.setBackground(Color.decode("#F7FAA5"));
@@ -346,6 +339,7 @@ public boolean checkTheNameOnExsiting(String name){
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
+                addSoundButtonEffect();
                 settingsPanel.setVisible(false);
                 remove(settingsPanel);
                 init(frame);
@@ -359,6 +353,7 @@ public boolean checkTheNameOnExsiting(String name){
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
+                addSoundButtonEffect();
                 boolean add = addition.getState();
                 boolean subtr = subtraction.getState();
                 boolean mult = multiplication.getState();
@@ -370,17 +365,21 @@ public boolean checkTheNameOnExsiting(String name){
                 int maxD = (int) maxNumO.getValue();
 
                 if(minD>maxD){
+                    addSoundProblemsEffect();
                     new Message("Oh, the min number of operations is bigger than the max number.\n Please change it.");
                 }
 
                 else if(max<min){
+                    addSoundProblemsEffect();
                     new Message("Oh, the min number is bigger than the max number.\n Please change it.");
                 }
 
                else if((max>0 && min>0 && (1+max-min)<numD) || (max<0 && min<0 && (1+max-min)<numD) || (max>=0 && min<=0 && (max-min)<numD)){
+                    addSoundProblemsEffect();
                     new Message("You`ve chosen too small number interval or too many cards.\nPlease, change interval or quantity of cards");
                 }
 else if((add==false && subtr==false && mult==false && div==false)){
+                    addSoundProblemsEffect();
                     new Message("You have not selected any operations. Please, select one at least.");
                 }
 else {
@@ -397,5 +396,33 @@ CreatePairs a = new CreatePairs(add, subtr, mult, div, max, min, maxD, minD, num
 
 
 
+    }
+
+    private void addSoundButtonEffect(){
+        try {
+            String click = "Sounds\\click.wav";
+            AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(new File(click).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream2);
+            clip.loop(0);
+        }catch(LineUnavailableException | IOException ex){
+            System.err.println(ex.getMessage());
+        } catch (UnsupportedAudioFileException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void addSoundProblemsEffect(){
+        try {
+            String click = "Sounds\\problemsSound.wav";
+            AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(new File(click).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream2);
+            clip.loop(0);
+        }catch(LineUnavailableException | IOException ex){
+            System.err.println(ex.getMessage());
+        } catch (UnsupportedAudioFileException ex) {
+            ex.printStackTrace();
+        }
     }
 }

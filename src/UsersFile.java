@@ -3,10 +3,10 @@ import java.util.ArrayList;
 
 public class UsersFile {
 //ФАЙЛ
-    static File file = new File("C:\\ab1\\game.txt");
+    static File file = new File("users\\game.txt");
     ArrayList<User> userArrayList;
     public static void main(String[] args) throws FileNotFoundException {
-        System.out.println(createArrayListFromFile());
+UsersFile a = new UsersFile();
     }
     public static File getFile() {
         return file;
@@ -24,9 +24,23 @@ public class UsersFile {
         this.userArrayList = userArrayList;
     }
 
-    public UsersFile() throws FileNotFoundException {
-        this.userArrayList = createArrayListFromFile();
+    public UsersFile(){
+        try{
+            /*
+        if(!file.exists()){
+                this.userArrayList = new ArrayList<>();
+                writeArrayListToTheFile(this.userArrayList);
+        }
+        else {
+            this.userArrayList = createArrayListFromFile();
+        }
 
+             */
+            this.userArrayList = createArrayListFromFile();
+        }catch(FileNotFoundException ex){
+            this.userArrayList = new ArrayList<>();
+            writeArrayListToTheFile(this.userArrayList);
+        }
     }
 
     private static ArrayList<User> createArrayListFromFile() throws FileNotFoundException {
@@ -118,17 +132,25 @@ ArrayList<User> answ = new ArrayList<>();
         }
         return answ;
     }
+private void createEmptyFile() throws FileNotFoundException, UnsupportedEncodingException {
+    PrintWriter writer = new PrintWriter(file.getAbsolutePath(), "UTF-8");
+    writer.append("The higest score: 0");
+}
 
-    static void writeArrayListToTheFile(ArrayList<User> user) throws FileNotFoundException, UnsupportedEncodingException {
-        PrintWriter writer = new PrintWriter(file.getAbsolutePath(), "UTF-8");
-        writer.println("The higest score: "+findThehighestScore(user));
-        writer.println(" ");
-       for(int i=0; i<user.size(); i++){
-           writer.println(user.get(i));
-           writer.println(" ");
-       }
+    static void writeArrayListToTheFile(ArrayList<User> user)  {
+        try {
+            PrintWriter writer = new PrintWriter(file.getAbsolutePath(), "UTF-8");
+            writer.println("The higest score: " + findThehighestScore(user));
+            writer.println(" ");
+            for (int i = 0; i < user.size(); i++) {
+                writer.println(user.get(i));
+                writer.println(" ");
+            }
 
-        writer.close();
+            writer.close();
+        }catch(FileNotFoundException | UnsupportedEncodingException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 
     private static boolean findAchivment(String s){
