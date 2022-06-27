@@ -3,7 +3,13 @@
   <component name="ProjectKey">
     <option name="state" value="project://e2804f05-5315-4fc6-a121-c522a6c26470" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="o" project-jdk-type="JavaSDK">
+||||||| 53d9202
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="openjdk-17" project-jdk-type="JavaSDK">
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="openjdk-17" project-jdk-type="JavaSDK">
+>>>>>>> 3b0ed4d476c5fa7bb3613439877561efeac7d098
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
