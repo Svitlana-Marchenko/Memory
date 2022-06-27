@@ -1,9 +1,12 @@
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,7 +18,10 @@ public class MainMenu extends JFrame {
     User user;
     static UsersFile userFile;
 
-    public MainMenu() throws FileNotFoundException {
+    String click = "Sounds\\click.wav";
+    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(click).getAbsoluteFile());
+
+    public MainMenu() throws IOException, UnsupportedAudioFileException {
         super("Mathmory");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500, 900);
@@ -98,6 +104,16 @@ textArea.setBackground(Color.decode("#F7FAA5"));
                                  @Override
                                  public void mousePressed(MouseEvent e) {
                                      super.mousePressed(e);
+                                     try {
+                                         Clip clip = AudioSystem.getClip();
+                                         clip.open(audioInputStream);
+                                         clip.start();
+                                     }catch(LineUnavailableException ex){
+                                         System.err.println(ex.getMessage());
+                                     }
+                                     catch(IOException ex){
+                                         System.err.println(ex.getMessage());
+                                     }
                                      System.exit(0);
                                  }
                              });
