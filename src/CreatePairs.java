@@ -2,30 +2,30 @@ import java.util.ArrayList;
 
 public class CreatePairs {
 
-   private static boolean addition; //0
-   private static boolean subtraction; //1
-   private static boolean multiplication; //2
-   private static boolean division; //3
+    private static boolean addition; //0
+    private static boolean subtraction; //1
+    private static boolean multiplication; //2
+    private static boolean division; //3
 
 
     private static int maxNum;
-   private static int minNum;
+    private static int minNum;
 
-   private static int numPairs;
+    private static int numPairs;
 
-   private static int maxNumDoing;
-   private static int minNumDoing;
+    private static int maxNumDoing;
+    private static int minNumDoing;
 
-   private static ArrayList<Pair> arrayListWithPair ;
+    private static ArrayList<Pair> arrayListWithPair ;
 
-public static ArrayList<Pair> temp(){
-    CreatePairs a = new CreatePairs(true, true, true, true, 50, -50, 5, 1, 10);
-    a.fillArrayList();
-    return arrayListWithPair;
-}
+    public static ArrayList<Pair> temp(){
+        CreatePairs a = new CreatePairs(true, true, true, true, 50, -50, 5, 1, 10);
+        a.fillArrayList();
+        return arrayListWithPair;
+    }
     public static void main(String[] args) {
 
-CreatePairs a = new CreatePairs(true, true, true, true, 50, -50, 5, 1, 2);
+        CreatePairs a = new CreatePairs(true, true, true, true, 50, -50, 5, 1, 2);
         a.fillArrayList();
         for(int i=0; i<a.getArrayListWithPair().size(); i++)
             System.out.println(a.getArrayListWithPair().get(i));
@@ -559,5 +559,3 @@ CreatePairs a = new CreatePairs(true, true, true, true, 50, -50, 5, 1, 2);
         return 4;
     }
 }
-
-
