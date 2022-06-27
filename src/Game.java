@@ -20,17 +20,20 @@ import java.util.concurrent.TimeUnit;
 
 public class Game extends JFrame {
 
-    static int cardsCols;
-    static int cardsRows;
-    static ArrayList<Pair> cards;
-    static int cardSize=70;
+    int cardsCols;
+    int cardsRows;
+    ArrayList<Pair> cards;
+    int cardSize=70;
      int openedCard=-1;
     int secondOpenedCard=-1;
-    static JPanel gamePanel;
-    static ArrayList<Integer> openedCards;
-    static JLabel opened;
-    static JLabel secondOpened;
+    JPanel gamePanel;
+    ArrayList<Integer> openedCards;
+    JLabel opened;
+    JLabel secondOpened;
     boolean clean;
+    static long startTime;
+    int mistakes;
+    CreatePairs gameSettings;
 
     public Game(){
         super("Mathmory");
@@ -39,7 +42,9 @@ public class Game extends JFrame {
         initGame(this);
     }
 
-    public static void main(String[] args) {
+    public void runGame(CreatePairs gameSettings) {
+        this.gameSettings=gameSettings;
+        startTime = System.currentTimeMillis();
         openedCards=new ArrayList<>();
         cards=CreatePairs.temp();
         countRowsAndCols();
@@ -59,7 +64,7 @@ public class Game extends JFrame {
                 if(openedCard!=finalNum&&!alreadyOpened(finalNum)) {
                     gamePanel.remove(finalNum+cardsCols);
                     System.out.println(finalNum);
-                    int size = calulateSize(cards.get(finalNum).getValue());
+                    int size = calculateSize(cards.get(finalNum).getValue());
                     if(opened==null) {
                         opened = new JLabel(cards.get(finalNum).getValue());
                         opened.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, size));
@@ -82,7 +87,9 @@ public class Game extends JFrame {
                             secondOpenedCard=-1;
                             opened=null;
                             secondOpened=null;
+                            if(openedCards.size()==cards.size()) Victory();
                         } else {
+                            mistakes++;
                             clean=true;
                         }
                     }else{
@@ -97,6 +104,14 @@ public class Game extends JFrame {
         };
         return listener;
     }
+
+    private void Victory() {
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        long elapsedSeconds = elapsedTime / 1000;
+        Results res=new Results(mistakes, (int) elapsedSeconds,gameSettings);
+// count score, check achievements, close window and go to main
+    }
+
     private void initGame(JFrame frame) {
         try {
             gamePanel = new JPanel(new GridLayout(cardsRows+1, cardsCols));
@@ -150,7 +165,7 @@ public class Game extends JFrame {
         secondOpened=null;
     }
 
-    private static int calulateSize(String textGiven) {
+    private int calculateSize(String textGiven) {
         int size=20;
         Font font = new Font("Arial Rounded MT Bold", Font.PLAIN, size);
         FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
@@ -163,7 +178,7 @@ public class Game extends JFrame {
         return size;
     }
 
-    private static void countRowsAndCols() {
+    private void countRowsAndCols() {
         switch (cards.size()){
             case 4: case 6:
                 cardsRows=2;
