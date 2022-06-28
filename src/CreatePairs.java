@@ -18,9 +18,8 @@ public class CreatePairs {
 
     private static ArrayList<Pair> arrayListWithPair ;
 
-    public static ArrayList<Pair> temp(){
-        CreatePairs a = new CreatePairs(true, true, true, true, 50, -50, 5, 1, 10);
-        a.fillArrayList();
+    public static ArrayList<Pair> getArrayCards(){
+        CreatePairs.fillArrayList();
         return arrayListWithPair;
     }
     public static void main(String[] args) {

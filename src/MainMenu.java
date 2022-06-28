@@ -13,23 +13,26 @@ public class MainMenu extends JFrame {
 
     JPanel mainPanel;
     User user;
-    static UsersFile userFile;
+    UsersFile userFile;
+    JFrame mainFrame;
 
 
-    public MainMenu() throws IOException, UnsupportedAudioFileException {
+    public MainMenu(boolean afterGame, User user) throws IOException, UnsupportedAudioFileException {
         super("Mathmory");
+        this.user=user;
+        mainFrame=this;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500, 900);
         this.userFile = new UsersFile();
-        initWelcomePage(this);
-
+        if(!afterGame)initWelcomePage(this);
+        else init(this);
 
     }
 
     /**
      * We will sort ArrayList with users from the highest score to the lowest score. If several users have the same score, they will be sorted with alphabet
      */
-    private static void sortUserFile(){
+    private void sortUserFile(){
         Collections.sort(userFile.getUserArrayList(), new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
@@ -384,7 +387,7 @@ public boolean checkTheNameOnExsiting(String name){
                     CreatePairs a = new CreatePairs(add, subtr, mult, div, max, min, maxD, minD, numD);
                     settingsPanel.setVisible(false);
                     remove(settingsPanel);
-                    Game.runGame(a);
+                    Game.runGame(a,user);
                     setVisible(false);
                     dispose();
                 }
@@ -421,6 +424,5 @@ public boolean checkTheNameOnExsiting(String name){
             ex.printStackTrace();
         }
     }
-
 
 }

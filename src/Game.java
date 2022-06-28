@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.event.AncestorListener;
 import java.awt.*;
@@ -31,6 +32,7 @@ public class Game extends JFrame {
     static long startTime;
     int mistakes;
     static CreatePairs gameSettings;
+    static User player;
 
     public Game(){
         super("Mathmory");
@@ -39,11 +41,12 @@ public class Game extends JFrame {
         initGame(this);
     }
 
-    public static void runGame(CreatePairs settings) {
+    public static void runGame(CreatePairs settings, User user) {
+        player=user;
         gameSettings=settings;
         startTime = System.currentTimeMillis();
         openedCards=new ArrayList<>();
-        cards=CreatePairs.temp();
+        cards=settings.getArrayCards();
         cards = sortRandomly(cards);
         countRowsAndCols();
         Game a = new Game();
@@ -107,11 +110,21 @@ public class Game extends JFrame {
         return listener;
     }
 
-    private void Victory() {
+    private void Victory()  {
         long elapsedTime = System.currentTimeMillis() - startTime;
         long elapsedSeconds = elapsedTime / 1000;
         Results res=new Results(mistakes, (int) elapsedSeconds,gameSettings);
-// count score, check achievements, close window and go to main
+//        score= ....
+        new Achievements().checkAll(player,1500,res);
+        setVisible(false);
+        dispose();
+        try{
+            MainMenu a= new MainMenu(true,player);
+            a.setBounds(200,0,600,800);
+            a.setVisible(true);
+        }catch (UnsupportedAudioFileException | IOException e){
+            e.printStackTrace();
+        }
     }
 
     private void initGame(JFrame frame) {

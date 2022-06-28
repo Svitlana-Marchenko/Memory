@@ -75,8 +75,10 @@ public class Achievements {
     }
 
     private void checkHardLevel() {
-        user.setHardLevel(true);
-        CongratulationMassage a=new CongratulationMassage("You received a new achievement!","images\\achievements\\thehardest.png");
+        if(operationsNum==4&& CreatePairs.getNumPairs()==16&&CreatePairs.getMaxNumDoing()==5&&CreatePairs.getMinNum()==5) {
+            user.setHardLevel(true);
+            CongratulationMassage a = new CongratulationMassage("You received a new achievement!", "images\\achievements\\thehardest.png");
+        }
     }
 
     private void checkGet1000() {
