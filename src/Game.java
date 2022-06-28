@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.font.FontRenderContext;
@@ -55,7 +56,7 @@ public class Game extends JFrame {
     }
 
     private MouseListener createListener(int finalNum){
-        MouseListener listener=new MouseListener() {
+        MouseListener listener=new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(clean){
@@ -68,7 +69,6 @@ public class Game extends JFrame {
                 }
                 if(openedCard!=finalNum&&!alreadyOpened(finalNum)) {
                     gamePanel.remove(finalNum+cardsCols);
-                    System.out.println(finalNum);
                     int size = calculateSize(cards.get(finalNum).getValue());
                     if(opened==null) {
                         opened = new JLabel(cards.get(finalNum).getValue());
@@ -102,10 +102,6 @@ public class Game extends JFrame {
                     }
                 }
             }
-            public void mousePressed(MouseEvent e) {}
-            public void mouseReleased(MouseEvent e) {}
-            public void mouseEntered(MouseEvent e) {}
-            public void mouseExited(MouseEvent e) {}
         };
         return listener;
     }
@@ -113,8 +109,10 @@ public class Game extends JFrame {
     private void Victory()  {
         long elapsedTime = System.currentTimeMillis() - startTime;
         long elapsedSeconds = elapsedTime / 1000;
+        player.setNumGames(player.getNumGames()+1);
         Results res=new Results(mistakes, (int) elapsedSeconds,gameSettings);
         int score= countScore(res);
+        CongratulationMassage mes=new CongratulationMassage("Your score is "+score,"images\\firework.jpg");
         new Achievements().checkAll(player,score,res);
         setVisible(false);
         dispose();
@@ -122,7 +120,7 @@ public class Game extends JFrame {
             player.setScore(score);
         }
         MainMenu a= new MainMenu(true,player);
-        a.setBounds(200,0,600,800);
+        a.setBounds(200,0,900,900);
         a.setVisible(true);
     }
 
@@ -157,12 +155,27 @@ public class Game extends JFrame {
             gamePanel.setBackground(Color.decode("#F7FAA5"));
             add(gamePanel);
 
-            for(int i=0;i<cardsCols-1;i++){
+            JLabel nick = new JLabel(player.getName(), SwingConstants.CENTER);
+            nick.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, calculateSize(player.getName())));
+            nick.setForeground(Color.decode("#970EAB"));
+            gamePanel.add(nick);
+            for(int i=1;i<cardsCols-1;i++){
                 gamePanel.add(new JLabel(""));
             }
             ImageIcon iconExit = new ImageIcon(ImageIO.read(new File("buttons\\exit.png")).getScaledInstance(cardSize, cardSize * 2 / 3, Image.SCALE_DEFAULT));
             JLabel exit = new JLabel(iconExit);
             gamePanel.add(exit);
+            exit.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
+                    setVisible(false);
+                    dispose();
+                    MainMenu a= new MainMenu(true,player);
+                    a.setBounds(200,0,600,800);
+                    a.setVisible(true);
+                }
+            });
 
             int num = 0;
             for (int r = 1; r <= cardsRows; r++) {
@@ -205,7 +218,7 @@ public class Game extends JFrame {
     }
 
     private int calculateSize(String textGiven) {
-        int size=20;
+        int size=40;
         Font font = new Font("Arial Rounded MT Bold", Font.PLAIN, size);
         FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
         int textwidth = (int)(font.getStringBounds(textGiven, frc).getWidth());

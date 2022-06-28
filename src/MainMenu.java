@@ -19,6 +19,7 @@ public class MainMenu extends JFrame {
 
 
     public MainMenu(boolean afterGame, User user){        super("Mathmory");
+
         this.user=user;
         mainFrame=this;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
