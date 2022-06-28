@@ -44,7 +44,7 @@ Fails10= false
  
 Name= yhyh
 Score= 30285
-NumGames= 2
+NumGames= 3
 Get1000= true
 Get2000= true
 Get5000= true
