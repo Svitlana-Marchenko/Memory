@@ -113,6 +113,7 @@ public class Game extends JFrame {
     private void Victory()  {
         long elapsedTime = System.currentTimeMillis() - startTime;
         long elapsedSeconds = elapsedTime / 1000;
+        player.setNumGames(player.getNumGames()+1);
         Results res=new Results(mistakes, (int) elapsedSeconds,gameSettings);
         int score= countScore(res);
         CongratulationMassage mes=new CongratulationMassage("Your score is "+score,"images\\firework.jpg");
