@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.font.FontRenderContext;
@@ -55,7 +56,7 @@ public class Game extends JFrame {
     }
 
     private MouseListener createListener(int finalNum){
-        MouseListener listener=new MouseListener() {
+        MouseListener listener=new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(clean){
@@ -102,10 +103,6 @@ public class Game extends JFrame {
                     }
                 }
             }
-            public void mousePressed(MouseEvent e) {}
-            public void mouseReleased(MouseEvent e) {}
-            public void mouseEntered(MouseEvent e) {}
-            public void mouseExited(MouseEvent e) {}
         };
         return listener;
     }
@@ -121,7 +118,7 @@ public class Game extends JFrame {
         setVisible(false);
         dispose();
         MainMenu a= new MainMenu(true,player);
-        a.setBounds(200,0,600,800);
+        a.setBounds(200,0,900,900);
         a.setVisible(true);
     }
 
@@ -162,6 +159,17 @@ public class Game extends JFrame {
             ImageIcon iconExit = new ImageIcon(ImageIO.read(new File("buttons\\exit.png")).getScaledInstance(cardSize, cardSize * 2 / 3, Image.SCALE_DEFAULT));
             JLabel exit = new JLabel(iconExit);
             gamePanel.add(exit);
+            exit.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
+                    setVisible(false);
+                    dispose();
+                    MainMenu a= new MainMenu(true,player);
+                    a.setBounds(200,0,600,800);
+                    a.setVisible(true);
+                }
+            });
 
             int num = 0;
             for (int r = 1; r <= cardsRows; r++) {
