@@ -16,13 +16,14 @@ public class MainMenu extends JFrame {
     static UsersFile userFile;
 
 
-    public MainMenu() throws IOException, UnsupportedAudioFileException {
+    public MainMenu() {
         super("Mathmory");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(900, 900);
         this.userFile = new UsersFile();
-        initWelcomePage(this);
 
+        initWelcomePage(this);
+        music();
 
     }
 
@@ -60,6 +61,7 @@ public class MainMenu extends JFrame {
         textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setFont(new Font("Arial", Font.PLAIN, 25));
+        textArea.setForeground(Color.decode("#970EAB"));
 
         mainPanel.add(scrollPane);
         sortUserFile();
@@ -283,7 +285,7 @@ public boolean checkTheNameOnExsiting(String name){
         minNum.setFont(new Font("Arial", Font.PLAIN, 25));
         settingsPanel.add(minNum);
 
-        JLabel maxQO = new JLabel("5) Min num of operations:");
+        JLabel maxQO = new JLabel("5) Max num of operations:");
         maxQO.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
         maxQO.setForeground(Color.decode("#970EAB"));
         settingsPanel.add(maxQO);
@@ -411,6 +413,46 @@ public boolean checkTheNameOnExsiting(String name){
             System.err.println(ex.getMessage());
         } catch (UnsupportedAudioFileException ex) {
             ex.printStackTrace();
+        }
+    }
+private int countScore(Results res){
+        double answ = 10000-res.getMistakes();
+        answ = answ/ res.getTime();
+        if(res.getGameSettings().isSubtraction()){
+        answ=answ*1.4;
+        }
+        if(res.getGameSettings().isMultiplication()){
+        answ=answ*1.6;
+        }
+        if(res.getGameSettings().isDivision()){
+        answ=answ*1.8;
+        }
+        answ = answ*res.getGameSettings().getMaxNumDoing()*(res.getGameSettings().getMaxNumDoing()-res.getGameSettings().getMinNumDoing())/10;
+        if(res.getGameSettings().getMinNum()<0){
+            answ = answ*1.2;
+        }
+        if(res.getGameSettings().getMaxNum()>600){
+            answ=answ*1.5;
+        }
+        answ = answ*res.getGameSettings().getNumPairs()*(res.getGameSettings().getMaxNum()-res.getGameSettings().getMinNum())/100;
+
+        return (int) answ;
+}
+
+    public static void music(){
+        try {
+            String click = "Sounds\\music.wav";
+            AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(new File(click).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream2);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            Thread.sleep(10000); // looping as long as this thread is alive
+        }catch(LineUnavailableException | IOException ex){
+            System.err.println(ex.getMessage());
+        } catch (UnsupportedAudioFileException ex) {
+            ex.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
