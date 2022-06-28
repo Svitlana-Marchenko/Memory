@@ -17,20 +17,20 @@ import java.util.concurrent.TimeUnit;
 
 public class Game extends JFrame {
 
-    int cardsCols;
-    int cardsRows;
-    ArrayList<Pair> cards;
-    int cardSize=70;
+    static int cardsCols;
+    static int cardsRows;
+    static ArrayList<Pair> cards;
+    static int cardSize=100;
      int openedCard=-1;
     int secondOpenedCard=-1;
     JPanel gamePanel;
-    ArrayList<Integer> openedCards;
+    static ArrayList<Integer> openedCards;
     JLabel opened;
     JLabel secondOpened;
     boolean clean;
     static long startTime;
     int mistakes;
-    CreatePairs gameSettings;
+    static CreatePairs gameSettings;
 
     public Game(){
         super("Mathmory");
@@ -39,8 +39,8 @@ public class Game extends JFrame {
         initGame(this);
     }
 
-    public void runGame(CreatePairs gameSettings) {
-        this.gameSettings=gameSettings;
+    public static void runGame(CreatePairs settings) {
+        gameSettings=settings;
         startTime = System.currentTimeMillis();
         openedCards=new ArrayList<>();
         cards=CreatePairs.temp();
@@ -56,7 +56,11 @@ public class Game extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(clean){
-                    clean();
+                    try {
+                        clean();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                     clean=false;
                 }
                 if(openedCard!=finalNum&&!alreadyOpened(finalNum)) {
@@ -126,7 +130,7 @@ public class Game extends JFrame {
             int num = 0;
             for (int r = 1; r <= cardsRows; r++) {
                 for (int c = 0; c < cardsCols; c++) {
-                    ImageIcon iconCard = new ImageIcon("images\\card.png");
+                    ImageIcon iconCard = new ImageIcon(ImageIO.read(new File("images\\card.png")).getScaledInstance(cardSize, cardSize, Image.SCALE_DEFAULT));
                     JLabel card = new JLabel(iconCard);
                     gamePanel.add(card);
                     int finalNum = num;
@@ -146,13 +150,13 @@ public class Game extends JFrame {
         return false;
     }
 
-    private void clean(){
+    private void clean() throws IOException {
         gamePanel.remove(opened);
-        JLabel one=new JLabel(new ImageIcon("images\\card.png"));
+        JLabel one=new JLabel(new ImageIcon(ImageIO.read(new File("images\\card.png")).getScaledInstance(cardSize, cardSize, Image.SCALE_DEFAULT)));
         one.addMouseListener(createListener(openedCard));
         gamePanel.add(one,openedCard+cardsCols);
         gamePanel.remove(secondOpened);
-        JLabel two=new JLabel(new ImageIcon("images\\card.png"));
+        JLabel two=new JLabel(new ImageIcon(ImageIO.read(new File("images\\card.png")).getScaledInstance(cardSize, cardSize, Image.SCALE_DEFAULT)));
         two.addMouseListener(createListener(secondOpenedCard));
         gamePanel.add(two,secondOpenedCard+cardsCols);
         gamePanel.revalidate();
@@ -176,7 +180,7 @@ public class Game extends JFrame {
         return size;
     }
 
-    private void countRowsAndCols() {
+    private static void countRowsAndCols() {
         switch (cards.size()){
             case 4: case 6:
                 cardsRows=2;
