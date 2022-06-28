@@ -15,8 +15,8 @@ Seconds30= false
 Fails10= false
  
 Name= qqqqq
-Score= 0
-NumGames= 0
+Score= 39
+NumGames= 9
 Get1000= false
 Get2000= false
 Get5000= false
