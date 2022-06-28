@@ -23,7 +23,7 @@ public class Game extends JFrame {
     static int cardsRows;
     static ArrayList<Pair> cards;
     static int cardSize=100;
-     int openedCard=-1;
+    int openedCard=-1;
     int secondOpenedCard=-1;
     JPanel gamePanel;
     static ArrayList<Integer> openedCards;
@@ -258,9 +258,9 @@ public class Game extends JFrame {
     }
 
     private static ArrayList<Pair> sortRandomly(ArrayList<Pair> list){
-    Pair[] pairsArray = createArrayFromArrayList(list);
-    randomSort(pairsArray);
-    return createArrayListFromArray(pairsArray);
+        Pair[] pairsArray = createArrayFromArrayList(list);
+        randomSort(pairsArray);
+        return createArrayListFromArray(pairsArray);
     }
 
     private static ArrayList<Pair> createArrayListFromArray(Pair[] info){

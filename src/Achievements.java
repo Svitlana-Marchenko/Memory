@@ -54,21 +54,21 @@ public class Achievements {
     }
 
     private void checkGames100() {
-        if(user.getNumGames()-1>=100){
+        if(user.getNumGames()>=100){
             user.setGames100(true);
             CongratulationMassage a=new CongratulationMassage("You received a new achievement!","images\\achievements\\games100.png");
         }
     }
 
     private void checkGames30() {
-        if(user.getNumGames()-1>=30) {
+        if(user.getNumGames()>=30) {
             user.setGames30(true);
             CongratulationMassage a = new CongratulationMassage("You received a new achievement!", "images\\achievements\\games30.png");
         }
     }
 
     private void checkGames10() {
-        if(user.getNumGames()-1>=10){
+        if(user.getNumGames()>=10){
             user.setGames10(true);
             CongratulationMassage a=new CongratulationMassage("You received a new achievement!","images\\achievements\\games10.png");
         }
