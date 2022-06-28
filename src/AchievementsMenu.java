@@ -26,43 +26,43 @@ public class AchievementsMenu extends JFrame {
 
         try {
             JLabel get1000, get2000, get5000, hardLevel, games10, games30, games100, seconds60, seconds30, fails10;
-            if (user.isGet1000()) get1000 = new JLabel(new ImageIcon("images\\achievements\\get1000.png"));
+            if (user.isGet1000()) get1000 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\get1000.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             else get1000 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\get1000Inactive.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             achievementsPanel.add(get1000);
 
-            if (user.isGet2000()) get2000 = new JLabel(new ImageIcon("images\\achievements\\get2000.png"));
+            if (user.isGet2000()) get2000 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\get2000.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             else get2000 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\get2000Inactive.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             achievementsPanel.add(get2000);
 
-            if (user.isGet5000()) get5000 = new JLabel(new ImageIcon("images\\achievements\\get5000.png"));
+            if (user.isGet5000()) get5000 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\get5000.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             else get5000 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\get5000Inactive.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             achievementsPanel.add(get5000);
 
-            if (user.isHardLevel()) hardLevel = new JLabel(new ImageIcon("images\\achievements\\thehardest.png"));
+            if (user.isHardLevel()) hardLevel = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\thehardest.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             else hardLevel = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\thehardestInactive.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             achievementsPanel.add(hardLevel);
 
-            if (user.isGames10()) games10 = new JLabel(new ImageIcon("images\\achievements\\games10.png"));
+            if (user.isGames10()) games10 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\games10.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             else games10 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\games10Inactive.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             achievementsPanel.add(games10);
 
-            if (user.isGames30()) games30 = new JLabel(new ImageIcon("images\\achievements\\games30.png"));
+            if (user.isGames30()) games30 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\games30.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             else games30 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\games30Inactive.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             achievementsPanel.add(games30);
 
-            if (user.isGames100()) games100 = new JLabel(new ImageIcon("images\\achievements\\games100.png"));
+            if (user.isGames100()) games100 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\games100.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             else games100 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\games100Inactive.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             achievementsPanel.add(games100);
 
-            if (user.isSeconds60()) seconds60 = new JLabel(new ImageIcon("images\\achievements\\seconds60.png"));
+            if (user.isSeconds60()) seconds60 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\seconds60.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             else seconds60 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\seconds60Inactive.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             achievementsPanel.add(seconds60);
 
-            if (user.isSeconds30()) seconds30 = new JLabel(new ImageIcon("images\\achievements\\seconds30.png"));
+            if (user.isSeconds30()) seconds30 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\seconds30.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             else seconds30 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\seconds30Inactive.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             achievementsPanel.add(seconds30);
 
-            if (user.isFails10()) fails10 = new JLabel(new ImageIcon("images\\achievements\\fails10.png"));
+            if (user.isFails10()) fails10 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\fails10.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             else fails10 = new JLabel(new ImageIcon(ImageIO.read(new File("images\\achievements\\fails10Inactive.png")).getScaledInstance(200, 200, Image.SCALE_DEFAULT)));
             achievementsPanel.add(fails10);
 

@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.event.AncestorListener;
 import java.awt.*;
@@ -31,6 +32,7 @@ public class Game extends JFrame {
     static long startTime;
     int mistakes;
     static CreatePairs gameSettings;
+    static User player;
 
     public Game(){
         super("Mathmory");
@@ -39,11 +41,12 @@ public class Game extends JFrame {
         initGame(this);
     }
 
-    public static void runGame(CreatePairs settings) {
+    public static void runGame(CreatePairs settings, User user) {
+        player=user;
         gameSettings=settings;
         startTime = System.currentTimeMillis();
         openedCards=new ArrayList<>();
-        cards=CreatePairs.temp();
+        cards=settings.getArrayCards();
         cards = sortRandomly(cards);
         countRowsAndCols();
         Game a = new Game();
@@ -107,11 +110,42 @@ public class Game extends JFrame {
         return listener;
     }
 
-    private void Victory() {
+    private void Victory()  {
         long elapsedTime = System.currentTimeMillis() - startTime;
         long elapsedSeconds = elapsedTime / 1000;
         Results res=new Results(mistakes, (int) elapsedSeconds,gameSettings);
-// count score, check achievements, close window and go to main
+        int score= countScore(res);
+        new Achievements().checkAll(player,score,res);
+        setVisible(false);
+        dispose();
+        MainMenu a= new MainMenu(true,player);
+        a.setBounds(200,0,600,800);
+        a.setVisible(true);
+    }
+
+
+    private int countScore(Results res){
+        double answ = 10000-res.getMistakes();
+        answ = answ/ res.getTime();
+        if(res.getGameSettings().isSubtraction()){
+            answ=answ*1.4;
+        }
+        if(res.getGameSettings().isMultiplication()){
+            answ=answ*1.6;
+        }
+        if(res.getGameSettings().isDivision()){
+            answ=answ*1.8;
+        }
+        answ = answ*res.getGameSettings().getMaxNumDoing()*(res.getGameSettings().getMaxNumDoing()-res.getGameSettings().getMinNumDoing())/10;
+        if(res.getGameSettings().getMinNum()<0){
+            answ = answ*1.2;
+        }
+        if(res.getGameSettings().getMaxNum()>600){
+            answ=answ*1.5;
+        }
+        answ = answ*res.getGameSettings().getNumPairs()*(res.getGameSettings().getMaxNum()-res.getGameSettings().getMinNum())/100;
+
+        return (int) answ;
     }
 
     private void initGame(JFrame frame) {

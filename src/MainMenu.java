@@ -13,23 +13,42 @@ public class MainMenu extends JFrame {
 
     JPanel mainPanel;
     User user;
-    static UsersFile userFile;
+    UsersFile userFile;
+    JFrame mainFrame;
 
 
+<<<<<<< HEAD
     public MainMenu() {
         super("Mathmory");
+||||||| 1504c45
+    public MainMenu() throws IOException, UnsupportedAudioFileException {
+        super("Mathmory");
+=======
+    public MainMenu(boolean afterGame, User user){        super("Mathmory");
+        this.user=user;
+        mainFrame=this;
+>>>>>>> f4183ed26f1ee2ae83863c8fe89cc95a4fe83449
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(900, 900);
         this.userFile = new UsersFile();
+<<<<<<< HEAD
         initWelcomePage(this);
         music();
+||||||| 1504c45
+        initWelcomePage(this);
+
+=======
+        if(!afterGame)initWelcomePage(this);
+        else init(this);
+        music();
+>>>>>>> f4183ed26f1ee2ae83863c8fe89cc95a4fe83449
 
     }
 
     /**
      * We will sort ArrayList with users from the highest score to the lowest score. If several users have the same score, they will be sorted with alphabet
      */
-    private static void sortUserFile(){
+    private void sortUserFile(){
         Collections.sort(userFile.getUserArrayList(), new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
@@ -377,7 +396,7 @@ public boolean checkTheNameOnExsiting(String name){
                     CreatePairs a = new CreatePairs(add, subtr, mult, div, max, min, maxD, minD, numD);
                     settingsPanel.setVisible(false);
                     remove(settingsPanel);
-                    Game.runGame(a);
+                    Game.runGame(a,user);
                     setVisible(false);
                     dispose();
                 }
@@ -466,5 +485,21 @@ private void updateUserFile(User a, int score){
         }
     }
 
+    public static void music(){
+        try {
+            String click = "Sounds\\music.wav";
+            AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(new File(click).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream2);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            Thread.sleep(10000); // looping as long as this thread is alive
+        }catch(LineUnavailableException | IOException ex){
+            System.err.println(ex.getMessage());
+        } catch (UnsupportedAudioFileException ex) {
+            ex.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -8,7 +8,10 @@ public class Main {
     public static void main(String[] args) throws IOException, UnsupportedAudioFileException {
         // write your code here
 
-        MainMenu a = new MainMenu();
+
+
+        MainMenu a = new MainMenu(false,null);
+
 
         a.setBounds(200,0,900,900);
         a.setVisible(true);
