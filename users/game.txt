@@ -3,7 +3,7 @@ The higest score: 0
 Name= qqq
 Score= 0
 NumGames= 0
-Get1000= false
+Get1000= true
 Get2000= false
 Get5000= false
 HardLevel= false
