@@ -175,7 +175,7 @@ public class Game extends JFrame {
                     setVisible(false);
                     dispose();
                     MainMenu a= new MainMenu(true,player);
-                    a.setBounds(200,0,600,800);
+                    a.setBounds(200,0,900,900);
                     a.setVisible(true);
                 }
             });

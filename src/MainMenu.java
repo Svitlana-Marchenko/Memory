@@ -261,7 +261,7 @@ public boolean checkTheNameOnExsiting(String name){
         operations.add(division);
         settingsPanel.add(division);
 
-        JLabel quantity = new JLabel("2) Num of cards:");
+        JLabel quantity = new JLabel("2) Num of pairs:");
         quantity.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
         quantity.setForeground(Color.decode("#970EAB"));
         settingsPanel.add(quantity);
@@ -383,6 +383,26 @@ public boolean checkTheNameOnExsiting(String name){
                     new Message("You have not selected any operations. Please, select one at least.");
                 }
 
+               else if(min>0&& subtr==false && mult==false && div==false && (max-min+1==numD)){
+                    addSoundProblemsEffect();
+                    new Message("We couldn`t provide the card set.\nPlease, change your operations or number interval;");
+                }
+
+                else if(min>0&& add==false && mult==false && div==false && (max-min+1==numD)){
+                    addSoundProblemsEffect();
+                    new Message("We couldn`t provide the card set.\nPlease, change your operations or number interval;");
+                }
+
+                else if(max<0&& subtr==false && mult==false && div==false && (max-min+1==numD)){
+                    addSoundProblemsEffect();
+                    new Message("We couldn`t provide the card set.\nPlease, change your operations or number interval;");
+                }
+
+                else if(max<0&& add==false && mult==false && div==false && (max-min+1==numD)){
+                    addSoundProblemsEffect();
+                    new Message("We couldn`t provide the card set.\nPlease, change your operations or number interval;");
+                }
+
                else {
                     CreatePairs a = new CreatePairs(add, subtr, mult, div, max, min, maxD, minD, numD);
                     settingsPanel.setVisible(false);
@@ -424,29 +444,6 @@ public boolean checkTheNameOnExsiting(String name){
             ex.printStackTrace();
         }
     }
-private int countScore(Results res){
-        double answ = 10000-res.getMistakes();
-        answ = answ/ res.getTime();
-        if(res.getGameSettings().isSubtraction()){
-        answ=answ*1.4;
-        }
-        if(res.getGameSettings().isMultiplication()){
-        answ=answ*1.6;
-        }
-        if(res.getGameSettings().isDivision()){
-        answ=answ*1.8;
-        }
-        answ = answ*res.getGameSettings().getMaxNumDoing()*(res.getGameSettings().getMaxNumDoing()-res.getGameSettings().getMinNumDoing())/10;
-        if(res.getGameSettings().getMinNum()<0){
-            answ = answ*1.2;
-        }
-        if(res.getGameSettings().getMaxNum()>600){
-            answ=answ*1.5;
-        }
-        answ = answ*res.getGameSettings().getNumPairs()*(res.getGameSettings().getMaxNum()-res.getGameSettings().getMinNum())/100;
-
-        return (int) answ;
-}
 
 private void updateUserFile(User a) {
     for (int i = 0; i < userFile.getUserArrayList().size(); i++) {
