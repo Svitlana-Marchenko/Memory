@@ -129,20 +129,21 @@ public class Game extends JFrame {
         double answ = 1000-res.getMistakes();
         answ = answ/ res.getTime();
         if(res.getGameSettings().isSubtraction()){
-            answ=answ*1.4;
+            answ=answ*1.2;
         }
         if(res.getGameSettings().isMultiplication()){
-            answ=answ*1.6;
+            answ=answ*1.3;
         }
         if(res.getGameSettings().isDivision()){
-            answ=answ*1.8;
+            answ=answ*1.4;
         }
-        answ = answ*res.getGameSettings().getMaxNumDoing()*(res.getGameSettings().getMaxNumDoing()-res.getGameSettings().getMinNumDoing())/10;
+        answ = answ*(res.getGameSettings().getMaxNumDoing()+5+res.getGameSettings().getMinNumDoing())/10;
+
         if(res.getGameSettings().getMinNum()<0){
-            answ = answ*1.2;
+            answ = answ*1.3;
         }
-        if(res.getGameSettings().getMaxNum()>600){
-            answ=answ*1.5;
+        if(res.getGameSettings().getMaxNum()>=600){
+            answ=answ*1.7;
         }
         answ = answ*res.getGameSettings().getNumPairs()*(res.getGameSettings().getMaxNum()-res.getGameSettings().getMinNum())/100;
 

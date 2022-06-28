@@ -2,7 +2,7 @@ The higest score: 24000000
  
 Name= qqq
 Score= 24000000
-NumGames= 0
+NumGames= 2
 Get1000= true
 Get2000= true
 Get5000= true
@@ -30,7 +30,7 @@ Fails10= false
  
 Name= qwerty
 Score= 103
-NumGames= 0
+NumGames= 2
 Get1000= false
 Get2000= false
 Get5000= false
@@ -43,11 +43,11 @@ Seconds30= false
 Fails10= false
  
 Name= yhyh
-Score= 112
-NumGames= 0
-Get1000= false
-Get2000= false
-Get5000= false
+Score= 30285
+NumGames= 2
+Get1000= true
+Get2000= true
+Get5000= true
 HardLevel= false
 Games10= false
 Games30= false
