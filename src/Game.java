@@ -115,6 +115,7 @@ public class Game extends JFrame {
         long elapsedSeconds = elapsedTime / 1000;
         Results res=new Results(mistakes, (int) elapsedSeconds,gameSettings);
         int score= countScore(res);
+        CongratulationMassage mes=new CongratulationMassage("Your score is "+score,"images\\firework.jpg");
         new Achievements().checkAll(player,score,res);
         setVisible(false);
         dispose();
