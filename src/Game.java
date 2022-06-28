@@ -112,13 +112,15 @@ public class Game extends JFrame {
         player.setNumGames(player.getNumGames()+1);
         Results res=new Results(mistakes, (int) elapsedSeconds,gameSettings);
         int score= countScore(res);
-        CongratulationMassage mes=new CongratulationMassage("Your score is "+score,"images\\firework.jpg");
+        String text="Your score is "+score;
+        if(player.getScore()<score){
+            player.setScore(score);
+            text="Congratulations! New record: "+score;
+        }
+        CongratulationMassage mes=new CongratulationMassage(text,"images\\firework.jpg");
         new Achievements().checkAll(player,score,res);
         setVisible(false);
         dispose();
-        if(player.getScore()<score){
-            player.setScore(score);
-        }
         MainMenu a= new MainMenu(true,player);
         a.setBounds(200,0,900,900);
         a.setVisible(true);
