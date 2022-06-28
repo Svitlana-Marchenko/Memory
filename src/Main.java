@@ -8,7 +8,7 @@ public class Main {
         // write your code here
 
         MainMenu a = new MainMenu();
-        a.setBounds(200,0,600,800);
+        a.setBounds(200,0,900,900);
         a.setVisible(true);
 
 

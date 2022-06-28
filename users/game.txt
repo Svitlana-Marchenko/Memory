@@ -14,3 +14,17 @@ Seconds60= false
 Seconds30= false
 Fails10= false
  
+Name= qqqqq
+Score= 0
+NumGames= 0
+Get1000= false
+Get2000= false
+Get5000= false
+HardLevel= false
+Games10= false
+Games30= false
+Games100= false
+Seconds60= false
+Seconds30= false
+Fails10= false
+ 

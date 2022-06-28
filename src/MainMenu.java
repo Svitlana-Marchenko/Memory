@@ -19,7 +19,7 @@ public class MainMenu extends JFrame {
     public MainMenu() throws IOException, UnsupportedAudioFileException {
         super("Mathmory");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500, 900);
+        this.setSize(900, 900);
         this.userFile = new UsersFile();
         initWelcomePage(this);
 
@@ -70,7 +70,7 @@ public class MainMenu extends JFrame {
 
 textArea.setBackground(Color.decode("#F7FAA5"));
 
-        ImageIcon iconPlay = new ImageIcon("buttons\\Play.png");
+        ImageIcon iconPlay = new ImageIcon("buttons\\play1.png");
         JLabel play = new JLabel(iconPlay);
         play.addMouseListener(new MouseAdapter() {
             @Override
@@ -84,7 +84,7 @@ textArea.setBackground(Color.decode("#F7FAA5"));
         });
         mainPanel.add(play);
 
-        ImageIcon iconAwards = new ImageIcon("buttons\\Awards.png");
+        ImageIcon iconAwards = new ImageIcon("buttons\\awards1.png");
         JLabel awards = new JLabel(iconAwards);
         awards.addMouseListener(new MouseAdapter() {
                                     @Override
@@ -95,7 +95,7 @@ textArea.setBackground(Color.decode("#F7FAA5"));
                                 });
                 mainPanel.add(awards);
 
-        ImageIcon iconExit = new ImageIcon("buttons\\Exit.png");
+        ImageIcon iconExit = new ImageIcon("buttons\\exit1.png");
         JLabel exit = new JLabel(iconExit);
        exit.addMouseListener(new MouseAdapter() {
                                  @Override
@@ -219,13 +219,13 @@ public boolean checkTheNameOnExsiting(String name){
         label.setForeground(Color.decode("#970EAB"));
         settingsPanel.add(label);
 
-        ImageIcon iconAdd = new ImageIcon("MathOperations\\addition.png");
+        ImageIcon iconAdd = new ImageIcon("MathOperations\\addition1.png");
 
-        ImageIcon iconDiv = new ImageIcon("MathOperations\\division.png");
+        ImageIcon iconDiv = new ImageIcon("MathOperations\\division1.png");
 
-        ImageIcon iconMult = new ImageIcon("MathOperations\\multiplication.png");
+        ImageIcon iconMult = new ImageIcon("MathOperations\\multiplication1.png");
 
-        ImageIcon iconSub = new ImageIcon("MathOperations\\subtraction.png");
+        ImageIcon iconSub = new ImageIcon("MathOperations\\subtraction1.png");
 
         JCheckBoxMenuItem addition = new JCheckBoxMenuItem("", iconAdd);
         addition.setBackground(Color.decode("#F7FAA5"));
@@ -237,7 +237,7 @@ public boolean checkTheNameOnExsiting(String name){
         operations.add(subtraction);
         settingsPanel.add(subtraction);
 
-        JCheckBoxMenuItem multiplication = new JCheckBoxMenuItem("", iconAdd);
+        JCheckBoxMenuItem multiplication = new JCheckBoxMenuItem("", iconMult);
         multiplication.setBackground(Color.decode("#F7FAA5"));
         operations.add(multiplication);
         settingsPanel.add(multiplication);
@@ -247,24 +247,16 @@ public boolean checkTheNameOnExsiting(String name){
         operations.add(division);
         settingsPanel.add(division);
 
-        JLabel quantity = new JLabel("2) Quantity of cards:");
+        JLabel quantity = new JLabel("2) Num of cards:");
         quantity.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
         quantity.setForeground(Color.decode("#970EAB"));
         settingsPanel.add(quantity);
 
-        JSlider numTask = new JSlider(4, 16, 6);
-        numTask.setBackground(Color.decode("#F7FAA5"));
-
-        numTask.setFont(new Font("Arial", Font.PLAIN, 25));
-
-        numTask.setPaintLabels(true);
-        numTask.setPaintTicks(true);
-
-        numTask.setPaintLabels(true);
-        numTask.setMajorTickSpacing(2);
-
-        numTask.setValueIsAdjusting(true);
-        settingsPanel.add(numTask);
+        JSpinner cardsQ = new JSpinner(new SpinnerNumberModel(10, 4, 36, 2));
+        cardsQ.getEditor().getComponent(0).setBackground(Color.decode("#F7FAA5"));
+        cardsQ.setSize(700, 300);
+        cardsQ.setFont(new Font("Arial", Font.PLAIN, 25));
+        settingsPanel.add(cardsQ);
 
         JLabel max = new JLabel("3) Max number:");
         max.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
@@ -288,7 +280,7 @@ public boolean checkTheNameOnExsiting(String name){
         minNum.setFont(new Font("Arial", Font.PLAIN, 25));
         settingsPanel.add(minNum);
 
-        JLabel maxQO = new JLabel("5) Max quantity of operations:");
+        JLabel maxQO = new JLabel("5) Min num of operations:");
         maxQO.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
         maxQO.setForeground(Color.decode("#970EAB"));
         settingsPanel.add(maxQO);
@@ -307,7 +299,7 @@ public boolean checkTheNameOnExsiting(String name){
         maxNumO.setValueIsAdjusting(true);
         settingsPanel.add(maxNumO);
 
-        JLabel minQO = new JLabel("6) Min quantity of operations:");
+        JLabel minQO = new JLabel("6) Min num of operations:");
         minQO.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 35));
         minQO.setForeground(Color.decode("#970EAB"));
         settingsPanel.add(minQO);
@@ -326,7 +318,7 @@ public boolean checkTheNameOnExsiting(String name){
         minNumO.setValueIsAdjusting(true);
         settingsPanel.add(minNumO);
 
-        ImageIcon iconBack = new ImageIcon("buttons\\back.png");
+        ImageIcon iconBack = new ImageIcon("buttons\\back1.png");
         JLabel back = new JLabel(iconBack);
         back.addMouseListener(new MouseAdapter() {
             @Override
@@ -340,7 +332,7 @@ public boolean checkTheNameOnExsiting(String name){
         });
         settingsPanel.add(back);
 
-        ImageIcon iconStart = new ImageIcon("buttons\\start.png");
+        ImageIcon iconStart = new ImageIcon("buttons\\start1.png");
         JLabel start = new JLabel(iconStart);
         start.addMouseListener(new MouseAdapter() {
             @Override
@@ -351,7 +343,7 @@ public boolean checkTheNameOnExsiting(String name){
                 boolean subtr = subtraction.getState();
                 boolean mult = multiplication.getState();
                 boolean div = division.getState();
-                int numD = numTask.getValue();
+                int numD = (int) cardsQ.getValue();
                 int min = (int) minNum.getValue();
                 int max = (int) maxNum.getValue();
                 int minD = (int) minNumO.getValue();
