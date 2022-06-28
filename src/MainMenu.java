@@ -21,7 +21,6 @@ public class MainMenu extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(900, 900);
         this.userFile = new UsersFile();
-
         initWelcomePage(this);
         music();
 
@@ -439,7 +438,18 @@ private int countScore(Results res){
         return (int) answ;
 }
 
-    public static void music(){
+private void updateUserFile(User a, int score){
+        for(int i=0; i<userFile.getUserArrayList().size(); i++){
+            if(a.getName().equals(userFile.getUserArrayList().get(i).getName())){
+                if(userFile.getUserArrayList().get(i).getScore()<score){
+                    userFile.getUserArrayList().get(i).setScore(score);
+                    userFile.writeArrayListToTheFile(userFile.getUserArrayList());
+                }
+            }
+        }
+}
+
+    private static void music(){
         try {
             String click = "Sounds\\music.wav";
             AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(new File(click).getAbsoluteFile());
