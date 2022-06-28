@@ -114,17 +114,38 @@ public class Game extends JFrame {
         long elapsedTime = System.currentTimeMillis() - startTime;
         long elapsedSeconds = elapsedTime / 1000;
         Results res=new Results(mistakes, (int) elapsedSeconds,gameSettings);
-//        score= ....
-        new Achievements().checkAll(player,1500,res);
+        int score= countScore(res);
+        new Achievements().checkAll(player,score,res);
         setVisible(false);
         dispose();
-        try{
-            MainMenu a= new MainMenu(true,player);
-            a.setBounds(200,0,600,800);
-            a.setVisible(true);
-        }catch (UnsupportedAudioFileException | IOException e){
-            e.printStackTrace();
+        MainMenu a= new MainMenu(true,player);
+        a.setBounds(200,0,600,800);
+        a.setVisible(true);
+    }
+
+
+    private int countScore(Results res){
+        double answ = 10000-res.getMistakes();
+        answ = answ/ res.getTime();
+        if(res.getGameSettings().isSubtraction()){
+            answ=answ*1.4;
         }
+        if(res.getGameSettings().isMultiplication()){
+            answ=answ*1.6;
+        }
+        if(res.getGameSettings().isDivision()){
+            answ=answ*1.8;
+        }
+        answ = answ*res.getGameSettings().getMaxNumDoing()*(res.getGameSettings().getMaxNumDoing()-res.getGameSettings().getMinNumDoing())/10;
+        if(res.getGameSettings().getMinNum()<0){
+            answ = answ*1.2;
+        }
+        if(res.getGameSettings().getMaxNum()>600){
+            answ=answ*1.5;
+        }
+        answ = answ*res.getGameSettings().getNumPairs()*(res.getGameSettings().getMaxNum()-res.getGameSettings().getMinNum())/100;
+
+        return (int) answ;
     }
 
     private void initGame(JFrame frame) {
