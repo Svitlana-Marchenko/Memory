@@ -69,7 +69,6 @@ public class Game extends JFrame {
                 }
                 if(openedCard!=finalNum&&!alreadyOpened(finalNum)) {
                     gamePanel.remove(finalNum+cardsCols);
-                    System.out.println(finalNum);
                     int size = calculateSize(cards.get(finalNum).getValue());
                     if(opened==null) {
                         opened = new JLabel(cards.get(finalNum).getValue());
@@ -153,7 +152,11 @@ public class Game extends JFrame {
             gamePanel.setBackground(Color.decode("#F7FAA5"));
             add(gamePanel);
 
-            for(int i=0;i<cardsCols-1;i++){
+            JLabel nick = new JLabel(player.getName(), SwingConstants.CENTER);
+            nick.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, calculateSize(player.getName())));
+            nick.setForeground(Color.decode("#970EAB"));
+            gamePanel.add(nick);
+            for(int i=1;i<cardsCols-1;i++){
                 gamePanel.add(new JLabel(""));
             }
             ImageIcon iconExit = new ImageIcon(ImageIO.read(new File("buttons\\exit.png")).getScaledInstance(cardSize, cardSize * 2 / 3, Image.SCALE_DEFAULT));
@@ -212,7 +215,7 @@ public class Game extends JFrame {
     }
 
     private int calculateSize(String textGiven) {
-        int size=20;
+        int size=40;
         Font font = new Font("Arial Rounded MT Bold", Font.PLAIN, size);
         FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
         int textwidth = (int)(font.getStringBounds(textGiven, frc).getWidth());
