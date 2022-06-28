@@ -374,14 +374,19 @@ public boolean checkTheNameOnExsiting(String name){
                     addSoundProblemsEffect();
                     new Message("You`ve chosen too small number interval or too many cards.\nPlease, change interval or quantity of cards");
                 }
-else if((add==false && subtr==false && mult==false && div==false)){
+
+               else if((add==false && subtr==false && mult==false && div==false)){
                     addSoundProblemsEffect();
                     new Message("You have not selected any operations. Please, select one at least.");
                 }
-else {
-CreatePairs a = new CreatePairs(add, subtr, mult, div, max, min, maxD, minD, numD);
+
+               else {
+                    CreatePairs a = new CreatePairs(add, subtr, mult, div, max, min, maxD, minD, numD);
                     settingsPanel.setVisible(false);
                     remove(settingsPanel);
+                    Game.runGame(a);
+                    setVisible(false);
+                    dispose();
                 }
             }
         });
