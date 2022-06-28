@@ -26,7 +26,10 @@ public class MainMenu extends JFrame {
         this.userFile = new UsersFile();
 
         if(!afterGame)initWelcomePage(this);
-        else init(this);
+        else {
+            updateUserFile(user);
+            init(this);
+        }
         music();
 
 
@@ -262,7 +265,7 @@ public boolean checkTheNameOnExsiting(String name){
         quantity.setForeground(Color.decode("#970EAB"));
         settingsPanel.add(quantity);
 
-        JSpinner cardsQ = new JSpinner(new SpinnerNumberModel(10, 4, 36, 2));
+        JSpinner cardsQ = new JSpinner(new SpinnerNumberModel(10, 2, 18, 1));
         cardsQ.getEditor().getComponent(0).setBackground(Color.decode("#F7FAA5"));
         cardsQ.setSize(700, 300);
         cardsQ.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -444,17 +447,17 @@ private int countScore(Results res){
         return (int) answ;
 }
 
-private void updateUserFile(User a, int score){
-        for(int i=0; i<userFile.getUserArrayList().size(); i++){
-            if(a.getName().equals(userFile.getUserArrayList().get(i).getName())){
-                if(userFile.getUserArrayList().get(i).getScore()<score){
-                    userFile.getUserArrayList().get(i).setScore(score);
-                    userFile.writeArrayListToTheFile(userFile.getUserArrayList());
-                }
-            }
-        }
-}
+private void updateUserFile(User a) {
+    for (int i = 0; i < userFile.getUserArrayList().size(); i++) {
+        if (a.getName().equals(userFile.getUserArrayList().get(i).getName())) {
+            userFile.getUserArrayList().set(i, a);
 
+            userFile.writeArrayListToTheFile(userFile.getUserArrayList());
+            break;
+
+        }
+    }
+}
     private static void music(){
         try {
             String click = "Sounds\\music.wav";
@@ -472,21 +475,6 @@ private void updateUserFile(User a, int score){
         }
     }
 
-    public static void music(){
-        try {
-            String click = "Sounds\\music.wav";
-            AudioInputStream audioInputStream2 = AudioSystem.getAudioInputStream(new File(click).getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream2);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-            Thread.sleep(10000); // looping as long as this thread is alive
-        }catch(LineUnavailableException | IOException ex){
-            System.err.println(ex.getMessage());
-        } catch (UnsupportedAudioFileException ex) {
-            ex.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 }

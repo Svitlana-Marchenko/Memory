@@ -118,6 +118,9 @@ public class Game extends JFrame {
         new Achievements().checkAll(player,score,res);
         setVisible(false);
         dispose();
+        if(player.getScore()<score){
+            player.setScore(score);
+        }
         MainMenu a= new MainMenu(true,player);
         a.setBounds(200,0,600,800);
         a.setVisible(true);
@@ -125,7 +128,7 @@ public class Game extends JFrame {
 
 
     private int countScore(Results res){
-        double answ = 10000-res.getMistakes();
+        double answ = 1000-res.getMistakes();
         answ = answ/ res.getTime();
         if(res.getGameSettings().isSubtraction()){
             answ=answ*1.4;
