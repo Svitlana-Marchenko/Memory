@@ -17,31 +17,18 @@ public class MainMenu extends JFrame {
     JFrame mainFrame;
 
 
-<<<<<<< HEAD
-    public MainMenu() {
-        super("Mathmory");
-||||||| 1504c45
-    public MainMenu() throws IOException, UnsupportedAudioFileException {
-        super("Mathmory");
-=======
+
     public MainMenu(boolean afterGame, User user){        super("Mathmory");
         this.user=user;
         mainFrame=this;
->>>>>>> f4183ed26f1ee2ae83863c8fe89cc95a4fe83449
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(900, 900);
         this.userFile = new UsersFile();
-<<<<<<< HEAD
-        initWelcomePage(this);
-        music();
-||||||| 1504c45
-        initWelcomePage(this);
 
-=======
         if(!afterGame)initWelcomePage(this);
         else init(this);
         music();
->>>>>>> f4183ed26f1ee2ae83863c8fe89cc95a4fe83449
+
 
     }
 
