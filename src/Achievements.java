@@ -75,7 +75,7 @@ public class Achievements {
     }
 
     private void checkHardLevel() {
-        if(operationsNum==4&& CreatePairs.getNumPairs()==16&&CreatePairs.getMaxNumDoing()==5&&CreatePairs.getMinNum()==5) {
+        if(operationsNum==4&& CreatePairs.getNumPairs()==18&&CreatePairs.getMaxNumDoing()==5&&CreatePairs.getMinNum()==5) {
             user.setHardLevel(true);
             CongratulationMassage a = new CongratulationMassage("You received a new achievement!", "images\\achievements\\thehardest.png");
         }
